@@ -1,0 +1,46 @@
+@import '../sass/media';
+
+.cap-image {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    animation: cap 3s ease-in-out infinite;
+}
+
+@keyframes cap {
+    0% {
+        transform: translateX(2px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateX(-2px) rotate(-10deg);
+    }
+
+    100% {
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+
+// result pages image
+
+.result-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+}
+
+// page not found images
+
+.page-not-found-image {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+}
+
+// timer clock
+
+.timer-clock {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}

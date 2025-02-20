@@ -1,0 +1,36 @@
+$breakpoints: ("xs": 575px,
+    "sm": ("min-width": 576px,
+        "max-width": 767.98px),
+    "md": ("min-width": 768px,
+        "max-width": 991.98px),
+    "lg": ("min-width": 992px,
+        "max-width": 1199.98px),
+    "xl": ("min-width": 1200px,
+        "max-width": 1440px),
+    "XXl": ("min-width": 1440.01px,
+        "max-width": 1680px));
+
+@mixin respond($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-values: map-get($breakpoints, $breakpoint);
+
+        @if type-of($breakpoint-values)=="map" {
+            $min-width: map-get($breakpoint-values, "min-width");
+            $max-width: map-get($breakpoint-values, "max-width");
+
+            @media (min-width: $min-width) and (max-width: $max-width) {
+                @content;
+            }
+        }
+
+        @else {
+            @media (max-width: $breakpoint-values) {
+                @content;
+            }
+        }
+    }
+
+    @else {
+        @warn "Breakpoint #{$breakpoint} not found in map!";
+    }
+}

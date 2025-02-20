@@ -1,0 +1,169 @@
+@import '../sass/media';
+
+.next-btn {
+    width: 100%;
+    padding: 9px 50px;
+    background-color: #401a7e;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 9px 50px;
+    background-color: #e62344;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.next-btn:hover {
+    width: 100%;
+    padding: 9px 50px;
+    background-color: #eb5757;
+    color: white;
+    cursor: pointer;
+    border: 2px solid #eb5757;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+
+}
+
+.previous-btn {
+
+    width: 100%;
+    padding: 9px 50px;
+    background-color: white;
+    cursor: pointer;
+    border: 2px solid #401a7e;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+    color: #282760;
+    text-align: center;
+
+}
+
+
+.previous-btn:hover {
+
+    width: 100%;
+    padding: 9px 50px;
+    background-color: #401a7e;
+    cursor: pointer;
+    border: 2px solid #401a7e;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 8px;
+    color: white;
+
+}
+
+.next-arrow {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.previous-arrow {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transform: rotate(-180deg);
+}
+
+// login buttons
+
+.login-button {
+    width: 400px;
+    background-color: red;
+    padding: 10px;
+    background-color: #eb5757;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+}
+
+// result
+
+.result-btn {
+    width: 100%;
+    background-color: red;
+    padding: 5px 30px;
+    background-color: #eb5757;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.home-btn {
+    width: 100%;
+    background-color: red;
+    padding: 5px 30px;
+    background-color: #7F56D9;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+}

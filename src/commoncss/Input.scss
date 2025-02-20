@@ -1,0 +1,34 @@
+@import '../sass/media';
+
+
+.input-main-section {
+    position: relative;
+}
+
+.input-box {
+    width: 400px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border: none;
+    outline: none;
+}
+
+.eye-show-icon {
+    position: absolute;
+    right: 4%;
+    top: 28%;
+    transform: translateY(-50%, -50%);
+}
+
+// texares
+
+.text-area-box {
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    padding: 10px;
+}
