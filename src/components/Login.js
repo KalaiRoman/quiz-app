@@ -49,7 +49,6 @@ function Login() {
   };
 
   const handleSubmit = async () => {
-    console.log(user, "user");
     try {
       if (!email && !password) {
         setUser((pre) => ({

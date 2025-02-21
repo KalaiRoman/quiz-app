@@ -1,4 +1,5 @@
 import QuestionsList from "../../utils/Questions";
+import { questionAttenUser, questionGet } from "../../utils/TokenLocal";
 import {
   QuestionCurrentUpdateNext,
   QuestionCurrentUpdatePrevious,
@@ -20,13 +21,21 @@ const Question_get = () => async (dispatch) => {
           yourResponse: "",
           correctResponse: "",
           YourAnswerstatus: false,
+          yourcoding: "",
+          yourOutput: "",
         };
         updateQuestions.push(datas);
       });
     }
-    if (updateQuestions) {
-      dispatch(QuestionSuccess(updateQuestions));
+
+    const oldData = questionGet();
+    if (oldData) {
+      questionAttenUser(oldData);
+    } else {
+      questionAttenUser(updateQuestions);
     }
+
+    dispatch(QuestionSuccess(oldData ? oldData : updateQuestions));
   } catch (error) {
     dispatch(QuestionFailed("Question Error..!"));
   }
@@ -57,9 +66,13 @@ const Question_Update_Current_Previous = (params) => async (dispatch) => {
 const Question_Update_Answer = (params) => async (dispatch) => {
   try {
     const updateQuestion = params;
+    const currentIndex = updateQuestion?.id;
+    const oldData = questionGet();
 
-    console.log(updateQuestion,'updateQuestion')
-
+    let updateDataAnswer = oldData?.map((item, index) =>
+      item?.id === currentIndex ? updateQuestion : item
+    );
+    questionAttenUser(updateDataAnswer);
     dispatch(QuestionCurrentUpdateAnswer(updateQuestion));
   } catch (error) {
     dispatch(QuestionFailed("Question Error..!"));

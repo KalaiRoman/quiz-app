@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resultimage } from "../assests/images";
 import { result_Text } from "../consts/Result_const";
 import { feedBackModal } from "../utils/Modals";
 import { useNavigate } from "react-router-dom";
 import { removeToken } from "../utils/TokenLocal";
+import { QuestionSuccess } from "../redux/reducers/Questions_reducer";
 function Result() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(true);
@@ -23,6 +25,8 @@ function Result() {
   const goBack = () => {
     navigate("/");
     removeToken();
+    dispatch(QuestionSuccess([]));
+    window.location.reload(true);
   };
 
   return (

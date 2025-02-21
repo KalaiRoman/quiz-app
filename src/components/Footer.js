@@ -6,24 +6,27 @@ import {
 } from "../redux/actions/Question_action";
 import { useNavigate } from "react-router-dom";
 
-function Footer({ currentQuestion, data }) {
+function Footer({ currentQuestion, data, setCode }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const currentUserData = data && data[currentQuestion];
+
   const handleNext = () => {
     dispatch(Question_Update_Current_Next(currentQuestion + 1));
+    setCode("");
   };
   const handlePrevious = () => {
-    console.log(currentQuestion, "currentQuestion");
     if (currentQuestion === 1) {
       dispatch(Question_Update_Current_Previous(0));
+      setCode(currentUserData?.yourcoding);
     } else {
       dispatch(Question_Update_Current_Previous(currentQuestion - 1));
+      setCode(currentUserData?.yourcoding);
     }
   };
 
   const handleSubmitResult = () => {
-    console.log(data, "data");
-
     navigate("/result");
   };
   return (
@@ -32,36 +35,37 @@ function Footer({ currentQuestion, data }) {
         {currentQuestion > 0 ? (
           <>
             <button className="previous-btn" onClick={handlePrevious}>
-              {/* <i class="fa-solid fa-arrow-left"></i> */}
               Previous
             </button>
           </>
         ) : (
           <>
-            <button className="previous-btn">
-              {/* <i class="fa-solid fa-arrow-left"></i> */}
-              Previous
-            </button>
+            <div>
+              <button className="next-btn" onClick={handleNext}>
+                Next
+              </button>
+            </div>
           </>
         )}
       </div>
 
-      <div>
-        {data?.length <= currentQuestion + 1 ? (
-          <>
-            <button className="submit-btn" onClick={handleSubmitResult}>
-              Submit{" "}
-            </button>
-          </>
-        ) : (
-          <>
-            <button className="next-btn" onClick={handleNext}>
-              Next
-              {/* <i class="fa-solid fa-arrow-right"></i> */}
-            </button>
-          </>
-        )}
-      </div>
+      {currentQuestion > 0 && (
+        <div>
+          {data?.length <= currentQuestion + 1 ? (
+            <>
+              <button className="submit-btn" onClick={handleSubmitResult}>
+                Submit{" "}
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="next-btn" onClick={handleNext}>
+                Next
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }

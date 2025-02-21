@@ -5,7 +5,6 @@ let initialState = {
   questionsData: [],
   error: "",
   currentQuestion: 0,
-  userResponseQuestions: [],
 };
 const Question_reducer = createSlice({
   name: "questions",
@@ -19,7 +18,7 @@ const Question_reducer = createSlice({
     QuestionSuccess(state, action) {
       state.loading = false;
       state.error = "";
-      state.questionsData = action.payload;
+      state.questionsData = action?.payload;
     },
     QuestionFailed(state, action) {
       state.loading = false;
@@ -42,7 +41,11 @@ const Question_reducer = createSlice({
         yourResponse,
         correctResponse,
         YourAnswerstatus,
+        yourcoding,
+        yourOutput,
+        type,
       } = action.payload;
+
       const findCurrentQuestion = state?.questionsData?.find(
         (item, index) => item?.id == id
       );
@@ -56,10 +59,12 @@ const Question_reducer = createSlice({
         findCurrentQuestion.score = score;
         findCurrentQuestion.yourResponse = yourResponse;
         findCurrentQuestion.correctResponse = correctResponse;
+        findCurrentQuestion.yourcoding = yourcoding;
+        findCurrentQuestion.yourOutput = yourOutput;
+        findCurrentQuestion.type = type;
       }
     },
   },
- 
 });
 
 export const {

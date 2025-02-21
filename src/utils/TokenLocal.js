@@ -9,6 +9,17 @@ const getToken = () => {
 const removeToken = () => {
   localStorage.clear();
   localStorage.removeItem("token-quiz");
+  localStorage.removeItem("questionAttented");
 };
 
-export { setToken, getToken, removeToken };
+// question attented
+
+const questionAttenUser = (params) => {
+  return localStorage.setItem("questionAttented", JSON.stringify(params));
+};
+
+const questionGet = () => {
+  return JSON.parse(localStorage.getItem("questionAttented"));
+};
+
+export { setToken, getToken, removeToken, questionAttenUser, questionGet };
