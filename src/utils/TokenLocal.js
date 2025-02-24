@@ -3,7 +3,13 @@ const setToken = (params) => {
 };
 
 const getToken = () => {
-  return JSON.parse(localStorage.getItem("token-quiz"));
+  try {
+    const token = localStorage.getItem("token-quiz");
+    return token ? JSON.parse(token) : null;
+  } catch (error) {
+    console.error("Error parsing token:", error);
+    return null;
+  }
 };
 
 const removeToken = () => {

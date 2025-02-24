@@ -24,7 +24,7 @@ function CodeCompiler({
       const result = runCodeInContext(code);
       setOutput(result);
       setYourOutput(result);
-      handleClickUser();
+      handleClickUser(code);
     } catch (error) {
       setOutput(`Error: ${error.message}`);
     }
@@ -48,6 +48,12 @@ function CodeCompiler({
     if (code?.length === 0) {
       setOutput("");
     }
+    if (output) {
+      setYourCode(output);
+    }
+    if (code) {
+      setYourCode(code);
+    }
   }, [code]);
   return (
     <div className="code-main-section">
@@ -66,9 +72,7 @@ function CodeCompiler({
           />
         </div>
         <div className="coding-out-section">
-          {/* <span className="grey-color">
-            Only run Code for Console.log() example : console.log(add(2,3))
-          </span> */}
+        
           <div className="grey-color mt-2 sm-fw sm">Example Input:</div>
           <div className="xs md-fw mt-2 mb-2">{question}</div>
           <div className="grey-color mt-2 sm-fw sm">Excepted Output:</div>

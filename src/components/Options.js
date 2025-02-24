@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Question_Update_Answer } from "../redux/actions/Question_action";
 import CodeCompiler from "./CodeCompiler";
@@ -9,75 +9,53 @@ function Options({ data, currentQuestion, setCode, code }) {
   const [youroutput, setYourOutput] = useState("");
   const currentData = data && data[currentQuestion];
 
-  const handleChange = (e) => {
+
+  const handleChange = (e, codes) => {
     let dataParams;
-    if (currentData?.type == "coding") {
-      const correctAnswerCheck = currentData?.expectedOutput == youroutput;
-      if (correctAnswerCheck) {
-        dataParams = {
-          id: currentData?.id,
-          options: "",
-          question: currentData?.question,
-          answer: "",
-          score: 1,
-          yourResponse: "",
-          correctResponse: "",
-          YourAnswerstatus: true,
-          yourcoding: yourcode,
-          yourOutput: youroutput,
-          type: "coding",
-        };
-      } else {
-        dataParams = {
-          id: currentData?.id,
-          options: "",
-          question: currentData?.question,
-          answer: "",
-          score: 0,
-          yourResponse: "",
-          correctResponse: "",
-          YourAnswerstatus: false,
-          yourcoding: yourcode,
-          yourOutput: youroutput,
-          type: "coding",
-        };
-      }
+    if (currentData?.type === "programming") {
+      const correctAnswerCheck = currentData?.expectedOutput === youroutput;
+
+      dataParams = {
+        id: currentData?._id,
+        options: "",
+        question: currentData?.question,
+        score: correctAnswerCheck ? 1 : 0,
+        yourResponse: "",
+        correctResponse: "",
+        YourAnswerstatus: correctAnswerCheck ? true : false,
+        yourcoding: yourcode ? yourcode : "",
+        yourOutput: youroutput ? youroutput : "",
+        type: currentData?.type,
+      };
     } else {
       if (currentData) {
-        const correctAnswerCheck = currentData?.answer == e;
-        if (correctAnswerCheck) {
-          dataParams = {
-            id: currentData?.id,
-            options: currentData?.options,
-            question: currentData?.question,
-            answer: currentData?.answer,
-            score: 1,
-            yourResponse: e,
-            correctResponse: currentData?.answer,
-            YourAnswerstatus: true,
-            yourcoding: "",
-            yourOutput: "",
-            type: "",
-          };
-        } else {
-          dataParams = {
-            id: currentData?.id,
-            options: currentData?.options,
-            question: currentData?.question,
-            answer: currentData?.answer,
-            score: 0,
-            yourResponse: e,
-            correctResponse: currentData?.answer,
-            YourAnswerstatus: false,
-            yourcoding: "",
-            yourOutput: "",
-            type: "",
-          };
-        }
+        const correctAnswerCheck =
+          currentData && currentData?.options?.find((item) => item?._id === e);
+
+        const correctAns =
+          currentData &&
+          currentData?.options?.find((item) => item?.answer == true)?.label;
+
+        dataParams = {
+          id: currentData?._id,
+          options: currentData?.options,
+          question: currentData?.question,
+          score: correctAnswerCheck?.answer ? 1 : 0,
+          yourResponse: e,
+          correctResponse: correctAns,
+          YourAnswerstatus: false,
+          yourcoding: "",
+          yourOutput: "",
+          type: currentData?.type,
+        };
       }
     }
+
+
     dispatch(Question_Update_Answer(dataParams));
   };
+
+  // useEffect(() => {}, [youroutput, yourcode]);
 
   return (
     <div>
@@ -98,35 +76,24 @@ function Options({ data, currentQuestion, setCode, code }) {
           {data[currentQuestion]?.options?.map((item, index) => {
             return (
               <div className="option-list">
-                {/* <input
-              type="radio"
-              value={item}
-              onChange={handleChange}
-              checked={value == item}
-              id={`handleChangeoptions${index + 1}`}
-              className="radio-button"
-            />
-            <label
-              htmlFor={`handleChangeoptions${index + 1}`}
-              className="label-option-texts sm-fw sm"
-            >
-              {item}
-            </label> */}
-
+                <div className="circle-section-option">
                 <div
                   className={
-                    currentData?.yourResponse == item
+                    currentData?.yourResponse == item?._id
                       ? "active-circle"
                       : "empty-circle"
                   }
-                  onClick={() => handleChange(item)}
+                  onClick={() => handleChange(item?._id, "")}
                 ></div>
-                <div
-                  className="label-option-texts sm-fw sm cursor"
-                  onClick={() => handleChange(item)}
-                >
-                  {item}
                 </div>
+               <div className="option-list-section">
+               <div
+                  className="label-option-texts sm-fw sm cursor"
+                  onClick={() => handleChange(item?._id, "")}
+                >
+                  {item?.label}
+                </div>
+               </div>
               </div>
             );
           })}

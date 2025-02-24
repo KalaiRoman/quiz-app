@@ -36,29 +36,21 @@ const Question_reducer = createSlice({
         id,
         options,
         question,
-        answer,
-        score,
         yourResponse,
-        correctResponse,
-        YourAnswerstatus,
         yourcoding,
         yourOutput,
         type,
       } = action.payload;
 
       const findCurrentQuestion = state?.questionsData?.find(
-        (item, index) => item?.id == id
+        (item, index) => item?._id == id
       );
 
       if (findCurrentQuestion) {
-        findCurrentQuestion.id = score;
-        findCurrentQuestion.answer = answer;
+        findCurrentQuestion._id = id;
         findCurrentQuestion.options = options;
         findCurrentQuestion.question = question;
-        findCurrentQuestion.YourAnswerstatus = YourAnswerstatus;
-        findCurrentQuestion.score = score;
         findCurrentQuestion.yourResponse = yourResponse;
-        findCurrentQuestion.correctResponse = correctResponse;
         findCurrentQuestion.yourcoding = yourcoding;
         findCurrentQuestion.yourOutput = yourOutput;
         findCurrentQuestion.type = type;

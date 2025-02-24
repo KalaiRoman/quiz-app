@@ -97,7 +97,7 @@ const codePreviewModal = (show, handleClose, handleShow) => {
   );
 };
 
-const submitModal = (show, handleClose, handleShow) => {
+const submitModal = (show, handleClose, handleShow, handleSubmitResult) => {
   return (
     <div>
       <Modal
@@ -108,20 +108,21 @@ const submitModal = (show, handleClose, handleShow) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>Automatically Submit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          I will not close if you click outside me. Do not even try to press
-          escape key.
+          <div className="text-center">
+            Automatically submit the exam if the user attempts to access it from
+            multiple browsers or sessions.
+          </div>
         </Modal.Body>
         <Modal.Footer>
-          <button variant="secondary" onClick={handleClose}>
-            Close
+          <button className="result-btn" onClick={handleSubmitResult}>
+            Submit
           </button>
-          <button variant="primary">Understood</button>
         </Modal.Footer>
       </Modal>
     </div>
   );
 };
-export { feedBackModal, codePreviewModal };
+export { feedBackModal, codePreviewModal, submitModal };

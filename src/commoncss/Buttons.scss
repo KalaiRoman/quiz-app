@@ -34,6 +34,13 @@
     gap: 10px;
     text-align: center;
     justify-content: center;
+    z-index: 989889;
+
+    @include respond("xs")
+    {
+        width: auto;
+        padding: 9px 20px;
+    }
 }
 
 .next-btn:hover {
@@ -124,6 +131,16 @@
     justify-content: center;
     gap: 10px;
     text-align: center;
+    @include respond("xs")
+    {
+        width: 320px;
+        padding: 9px 20px;
+    }
+    @include respond("md")
+    {
+        width: 320px;
+        padding: 9px 20px;
+    }
 }
 
 // result
@@ -187,8 +204,7 @@
     text-align: center;
 }
 
-.run-btn-disabled
-{
+.run-btn-disabled {
     width: auto;
     padding: 5px 20px;
     background-color: white;
@@ -217,4 +233,5 @@
     outline: none;
     border-radius: 8px;
     text-align: center;
+
 }

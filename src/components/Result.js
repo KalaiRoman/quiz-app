@@ -29,6 +29,7 @@ function Result() {
     window.location.reload(true);
   };
 
+
   return (
     <div className="main-result-section">
       <div className="inside-result-section">
@@ -42,7 +43,7 @@ function Result() {
               {result_Text?.backbuttonText}
             </button>
           </div>
-          <div>{feedBackModal(show, handleClose, handleShow)}</div>{" "}
+          {/* <div>{feedBackModal(show, handleClose, handleShow)}</div>{" "} */}
         </div>
       </div>
     </div>

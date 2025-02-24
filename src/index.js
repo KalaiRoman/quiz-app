@@ -9,17 +9,14 @@ import HotToastModal from "./middleware/HotToastModal";
 import { ErrorProvider } from "./contextapis/ErrorContext";
 import ErrorBoundary from "./middleware/ErrorBoundary";
 import ReduxProvider from "./middleware/ReduxProvider";
-
 // boostrap css links
-
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import HideDocuments from "./utils/HideDocuments";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <HideDocuments>
-    <ErrorBoundary>
+    <ErrorProvider>
       <ReduxProvider>
         <LazyLoader>
           <ErrorProvider>
@@ -31,7 +28,7 @@ root.render(
           </ErrorProvider>
         </LazyLoader>
       </ReduxProvider>
-    </ErrorBoundary>
+    </ErrorProvider>
   // </HideDocuments>
 );
 

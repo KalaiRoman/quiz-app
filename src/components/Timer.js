@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { timer } from "../assests/images";
-function Timer() {
+function Timer({ setCheckTime }) {
   const [time, setTime] = useState(3600);
 
   useEffect(() => {
@@ -17,6 +17,7 @@ function Timer() {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
+    setCheckTime(`${hrs}${mins}${secs}`);
     return `${String(hrs).padStart(2, "0")}:${String(mins).padStart(
       2,
       "0"
@@ -28,9 +29,7 @@ function Timer() {
       <>
         <span className="md">
           {/* <i class="fa-regular fa-clock"></i> */}
-          <img src={timer} alt="no image"
-          className="timer-clock"
-          />
+          <img src={timer} alt="no image" className="timer-clock" />
         </span>{" "}
         <span className="md md-fw">{formatTime(time)}</span>
       </>

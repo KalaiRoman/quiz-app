@@ -8,16 +8,24 @@
 // sm
 .sm {
     font-size: 18px;
+    @include respond("xs") {
+        font-size: 16px;
+    }
 }
 
 // md
 .md {
     font-size: 22px;
+
+    @include respond("xs") {
+        font-size: 16px;
+    }
 }
 
 // lg
 .lg {
     font-size: 24px;
+
 }
 
 // xl

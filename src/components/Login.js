@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { handcap, loginimage } from "../assests/images";
 import InputBoxs from "../utils/InputBoxs";
 import { RegexData } from "../utils/Regex";
@@ -6,23 +6,26 @@ import { LoginTexts } from "../consts/Login_const";
 import { Login_Icons } from "../consts/Icons/Icons";
 import { useDispatch } from "react-redux";
 import { Login_User } from "../redux/actions/Login_action";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { getToken } from "../utils/TokenLocal";
 
 function Login() {
+  const [paramsCode] = useSearchParams();
+
+  console.log(paramsCode, "kalai");
+
+  const codeParams = paramsCode?.get("code");
   const [user, setUser] = useState({
     email: "",
-    password: "",
     error: "",
+    type: "false",
   });
+  const [loading, setLoading] = useState(false);
+  const { email, error, type } = user;
   const token = getToken();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [show, setShow] = useState(false);
-
-  const { email, password, error } = user;
-
   const loginForms = [
     {
       id: 1,
@@ -30,53 +33,92 @@ function Login() {
       placeholder: LoginTexts?.emailplaceholder,
       type: "text",
       value: email,
-    },
-    {
-      id: 2,
-      name: "password",
-      placeholder: LoginTexts?.passwordplaceholder,
-      type: "password",
-      value: password,
+      label: LoginTexts?.label,
     },
   ];
-
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-
   const handleChangeShow = () => {
     setShow((pre) => !pre);
   };
-
   const handleSubmit = async () => {
+    setLoading(true);
     try {
-      if (!email && !password) {
+      if (!email) {
         setUser((pre) => ({
           ...pre,
-          error: "Please Enter Email ID and Password",
+          error: "Please Enter Email ID / Mobile No",
         }));
+        setLoading(false);
       } else {
-        if (email && password) {
-          if (RegexData.emailRegex.test(email)) {
-            const data = {
-              email,
-              password,
-            };
-            dispatch(Login_User(data, navigate));
-            setUser((pre) => ({
-              ...pre,
-              error: "",
-            }));
-          } else {
-            setUser((pre) => ({
-              ...pre,
-              error: "Please Enter Valid Email ID",
-            }));
+        if (type) {
+          if (email) {
+            if (RegexData.mobileNo.test(email)) {
+              const data = {
+                email,
+                code: codeParams,
+              };
+              dispatch(Login_User(data, navigate, setLoading));
+              setUser((pre) => ({
+                ...pre,
+                error: "",
+              }));
+              setLoading(false);
+            } else {
+              setUser((pre) => ({
+                ...pre,
+                error: "Please Enter Valid Mobile No",
+              }));
+            }
+          }
+        } else {
+          if (email) {
+            if (RegexData.emailRegex.test(email)) {
+              const data = {
+                email,
+                code: codeParams,
+              };
+              dispatch(Login_User(data, navigate, setLoading));
+              setUser((pre) => ({
+                ...pre,
+                error: "",
+              }));
+              setLoading(false);
+            } else {
+              setUser((pre) => ({
+                ...pre,
+                error: "Please Enter Valid Email ID",
+              }));
+              setLoading(false);
+            }
           }
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    }
   };
+
+  const checkTypeInput = useCallback(async () => {
+    try {
+      if (RegexData?.number?.test(email)) {
+        setUser((pre) => ({
+          ...pre,
+          type: true,
+        }));
+      } else {
+        setUser((pre) => ({
+          ...pre,
+          type: false,
+        }));
+      }
+    } catch (error) {}
+  }, [type, email]);
+
+  useEffect(() => {
+    checkTypeInput();
+  }, [email]);
 
   if (token) {
     return <Navigate to="/home" />;
@@ -96,10 +138,7 @@ function Login() {
                 return (
                   <div>
                     <div>
-                      <label>
-                        {item?.name.at(0).toUpperCase()}
-                        {item?.name?.slice(1)}
-                      </label>
+                      <label>{item?.label}</label>
                     </div>
                     <div className="mt-2 mb-4">
                       <InputBoxs
@@ -110,6 +149,7 @@ function Login() {
                         onChange={handleChange}
                         showPassword={handleChangeShow}
                         show={show}
+                        emailormobilecheck={type}
                       />
                     </div>
                   </div>
@@ -120,7 +160,7 @@ function Login() {
             </div>
             <div>
               <button className="login-button mt-2" onClick={handleSubmit}>
-                <div>{LoginTexts?.LoginButton}</div>{" "}
+                <div>{loading ? "Loading..." : LoginTexts?.LoginButton}</div>{" "}
                 <div>{Login_Icons?.LoginIcon}</div>
               </button>
             </div>

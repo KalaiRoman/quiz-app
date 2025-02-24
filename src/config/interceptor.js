@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Envfiles } from "../utils/EnvFiles";
 import { getToken } from "../utils/TokenLocal";
+import { toastError } from "../utils/ToastModal";
 
 const axiosUrl = axios.create({
   baseURL: Envfiles?.baseurl,
@@ -9,14 +10,15 @@ axiosUrl.interceptors.request.use(
   function (config) {
     const token = getToken();
     config.url = `${Envfiles?.baseurl}${config.url}`;
+
     config.withCredentials = false;
-    if (token) {
-      config.headers = {
-        ...config.headers,
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${JSON.parse(token)}`,
-      };
-    }
+    // if (token) {
+    //   config.headers = {
+    //     ...config.headers,
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${JSON.parse(token)}`,
+    //   };
+    // }
     return config;
   },
   function (error) {
@@ -29,6 +31,7 @@ axiosUrl.interceptors.response.use(
     return response;
   },
   function (error) {
+    toastError(error?.response?.data?.message);
     return Promise.reject(error);
   }
 );

@@ -5,6 +5,34 @@
     gap: 10px;
     margin: 30px 0px;
     align-items: center;
+    width: 100%;
+    .circle-section-option
+    {
+        width: 5%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include respond("xs")
+        {
+            width: 20%;
+        }
+    }
+    .option-list-section
+    {
+        width: 95%;
+
+        @include respond("xs")
+        {
+            width: 80%;
+        }
+    }
+    @include respond("xs") {
+        gap: 0px;
+        justify-content: space-around;
+        align-items: center;
+        margin: 12uttpx 0px;
+    }
 
     .active-circle {
         width: 20px;
@@ -24,5 +52,17 @@
         border-radius: 50%;
         border: 1px solid grey;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+
+        @include respond("xs") {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        @include respond("sm") {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
     }
 }

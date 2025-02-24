@@ -10,15 +10,20 @@ import Options from "./Options";
 function Quiz() {
   const dispatch = useDispatch();
   const [code, setCode] = useState("");
+  const [checktime, setCheckTime] = useState(null);
   const state = useSelector((state) => state?.Questions);
   useEffect(() => {
     dispatch(Question_get());
-  }, [dispatch]);
+  }, [dispatch, checktime]);
   return (
     <div className="main-quiz">
       <div className="inside-quiz-section">
         <div className="header-quiz">
-          <Header data={state} currentQuestion={state?.currentQuestion} />
+          <Header
+            data={state}
+            currentQuestion={state?.currentQuestion}
+            setCheckTime={setCheckTime}
+          />
         </div>
         <div className="question-quiz">
           <div className="quiz-inside">
@@ -40,8 +45,9 @@ function Quiz() {
                 <div className="quiz-footer-buttons">
                   <Footer
                     currentQuestion={state?.currentQuestion}
-                    data={state?.questionsData}
+                    dataOld={state?.questionsData}
                     setCode={setCode}
+                    checktime={checktime}
                   />
                 </div>
               </div>

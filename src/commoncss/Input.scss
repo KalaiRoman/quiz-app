@@ -3,6 +3,18 @@
 
 .input-main-section {
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0px;
+}
+
+.country-box {
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border: none;
+    outline: none;
 }
 
 .input-box {
@@ -13,6 +25,15 @@
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     border: none;
     outline: none;
+
+    @include respond("xs")
+    {
+        width: 100%;
+    }
+    @include respond("md")
+    {
+        width: 100%;
+    }
 }
 
 .eye-show-icon {

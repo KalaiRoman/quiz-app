@@ -3,12 +3,12 @@ import React from "react";
 import Timer from "./Timer";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-function Header({ data, currentQuestion }) {
+function Header({ data, currentQuestion,setCheckTime }) {
   const percentage =
     (Number(currentQuestion + 1) / Number(data?.questionsData?.length)) * 100;
   return (
     <div className="header-section">
-      <div className="sm grey-color">Kalaisurya</div>
+      <div className="sm grey-color">Exam</div>
       <div className="lg md-fw progressbar-show">
         <div style={{ width: 40, height: 40 }}>
           <CircularProgressbar
@@ -26,7 +26,9 @@ function Header({ data, currentQuestion }) {
         {data?.questionsData?.length}
       </div>
       <div>
-        <Timer />
+        <Timer 
+        setCheckTime={setCheckTime}
+        />
       </div>
     </div>
   );

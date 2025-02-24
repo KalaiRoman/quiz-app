@@ -8,9 +8,11 @@ function InputBoxs({
   onChange,
   showPassword,
   show,
+  emailormobilecheck,
 }) {
   return (
     <div className="input-main-section">
+      <div className={emailormobilecheck?"country-box":""}>{emailormobilecheck ? "+91" : null}</div>
       <input
         type={show ? "text" : type}
         placeholder={placeholder}

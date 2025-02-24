@@ -9,4 +9,9 @@
     align-items: center;
     gap: 30px;
     padding: 20px 0px;
+    @include respond("xs")
+    {
+        flex-direction: column;
+        margin-bottom:100px;
+    }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { somethingwentwromngimage } from "../assests/images";
+import { removeToken } from "../utils/TokenLocal";
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -17,6 +18,8 @@ class ErrorBoundary extends Component {
 
   handleClickRefresh() {
     window.location.reload(false);
+    removeToken();
+    window.location.assign("/");
   }
   render() {
     if (this.state.hasError) {
