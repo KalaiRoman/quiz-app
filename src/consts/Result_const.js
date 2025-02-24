@@ -46,5 +46,6 @@ const Result_texts = [
 const result_Text = {
   thankyou:
     "Thank you for attending the exam. We appreciate your time and effort!",
+    backbuttonText:"Back to Home"
 };
 export { Result_texts, result_Text };

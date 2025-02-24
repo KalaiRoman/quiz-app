@@ -39,7 +39,7 @@ function Result() {
         <div className="d-flex gap-5 mt-4 mb-4">
           <div>
             <button className="result-btn" onClick={goBack}>
-              Back to Home
+              {result_Text?.backbuttonText}
             </button>
           </div>
           <div>{feedBackModal(show, handleClose, handleShow)}</div>{" "}

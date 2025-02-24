@@ -5,6 +5,7 @@ import {
   Question_Update_Current_Previous,
 } from "../redux/actions/Question_action";
 import { useNavigate } from "react-router-dom";
+import { Quiz_texts } from "../consts/Quiz_const";
 
 function Footer({ currentQuestion, data, setCode }) {
   const navigate = useNavigate();
@@ -35,14 +36,14 @@ function Footer({ currentQuestion, data, setCode }) {
         {currentQuestion > 0 ? (
           <>
             <button className="previous-btn" onClick={handlePrevious}>
-              Previous
+              {Quiz_texts?.Previous}
             </button>
           </>
         ) : (
           <>
             <div>
               <button className="next-btn" onClick={handleNext}>
-                Next
+                {Quiz_texts?.Next}
               </button>
             </div>
           </>
@@ -54,13 +55,13 @@ function Footer({ currentQuestion, data, setCode }) {
           {data?.length <= currentQuestion + 1 ? (
             <>
               <button className="submit-btn" onClick={handleSubmitResult}>
-                Submit{" "}
+                {Quiz_texts?.Submit}
               </button>
             </>
           ) : (
             <>
               <button className="next-btn" onClick={handleNext}>
-                Next
+                {Quiz_texts?.Next}
               </button>
             </>
           )}

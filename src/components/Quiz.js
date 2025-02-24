@@ -10,7 +10,6 @@ import Options from "./Options";
 function Quiz() {
   const dispatch = useDispatch();
   const [code, setCode] = useState("");
-
   const state = useSelector((state) => state?.Questions);
   useEffect(() => {
     dispatch(Question_get());
